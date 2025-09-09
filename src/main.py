@@ -1,5 +1,6 @@
 """A simple Python script that prints messages to the console."""
 
+
 def unused_function():
     """An unused function to demonstrate linting."""
 

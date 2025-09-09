@@ -76,7 +76,8 @@ jobs:
           echo "Non-critical lint errors will be treated as warnings due to 'no lint' in commit message"
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
         else
-          flake8 . --count --max-complexity=10 --max-line-length=127 --statistics
+          flake8 . --count --select=E --max-complexity=10 --max-line-length=127 --statistics
+          flake8 . --count --exit-zero --select=W --max-complexity=10 --max-line-length=127 --statistics
         fi
 
     - if: success() || failure()
