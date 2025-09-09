@@ -1,17 +1,17 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Python package
+name: CI python
 
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - '**.py'
+    # paths:
+    #   - '**.py'
   pull_request:
     branches: [ "main" ]
-    paths:
-      - '**.py'
+    # paths:
+    #   - '**.py'
 
 env:
   PYTHON_SOURCE_DIR: ${{ vars.PYTHON_SOURCE_DIR || 'src' }}
