@@ -7,11 +7,11 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - '**/*.py'
+      - '**.py'
   pull_request:
     branches: [ "main" ]
     paths:
-      - '**/*.py'
+      - '**.py'
 
 env:
   PYTHON_SOURCE_DIR: ${{ vars.PYTHON_SOURCE_DIR || 'src' }}
