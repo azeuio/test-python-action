@@ -1,1 +1,2 @@
-# test-python-action
+<!-- + [![cov](https://<you>.github.io/<repo>/badges/coverage.svg)](https://github.com/<you>/<repo>/actions) -->
++ [![cov](https://azeuio.github.io/test-python-action/badges/coverage.svg)](https://github.com/azeuio/test-python-action/actions)
