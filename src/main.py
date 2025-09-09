@@ -4,6 +4,7 @@
 def unused_function():
     """An unused function to demonstrate linting."""
 
+
 if __name__ == '__main__':
     print(f"Hello, {input()}!")
     print("Hello, World!")
