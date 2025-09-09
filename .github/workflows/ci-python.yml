@@ -61,7 +61,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install flake8 pytest
+        python -m pip install flake8 pytest coverage-badge pytest-cov
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Lint with flake8
@@ -92,12 +92,13 @@ jobs:
         echo "```" >> $GITHUB_STEP_SUMMARY
 
     - name: Test with pytest
+      id: pytest
       run: |
         pytest
-    - if: success() || failure()
-      name: Coverage report
-      run: |
-        echo "" >> $GITHUB_STEP_SUMMARY
+        # Generate coverage badge
+        coverage-badge -o coverage.svg
+
+        echo "![Coverage Badge](coverage.svg)" >> $GITHUB_STEP_SUMMARY
         echo "### Coverage report" >> $GITHUB_STEP_SUMMARY
         echo "```" >> $GITHUB_STEP_SUMMARY
         coverage report >> $GITHUB_STEP_SUMMARY
