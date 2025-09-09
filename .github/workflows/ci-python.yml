@@ -43,10 +43,9 @@ jobs:
 
     - if: steps.cache-config-files.outputs.cache-hit != 'true'
       id: update-config
-      run: |
-        echo "Config files not found in cache, updating them"
       name: Set test and source dir in config files
       run: |
+        echo "Config files not found in cache, updating them"
         sed -i "s|*/tests/*|*/${{ env.PYTHON_TEST_DIR }}/*|g" .coveragerc
         cat .coveragerc
         sed -i "s|^testpaths = .*|testpaths = ${{ env.PYTHON_TEST_DIR }}|g" pytest.ini
