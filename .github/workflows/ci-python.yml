@@ -78,7 +78,7 @@ jobs:
     - if: success() || failure()
       name: Update test summary
       run: |
-        echo -e "\n```" >> $GITHUB_STEP_SUMMARY
+        echo -e "\n\`\`\`" >> $GITHUB_STEP_SUMMARY
         echo "### Lint results" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         flake8 . --count --exit-zero --select=E9,F63,F7,F82 --show-source --statistics >> $GITHUB_STEP_SUMMARY || true
@@ -89,7 +89,7 @@ jobs:
           flake8 . --count --select=E --max-complexity=10 --max-line-length=127 --statistics >> $GITHUB_STEP_SUMMARY || true
           flake8 . --count --exit-zero --select=W --max-complexity=10 --max-line-length=127 --statistics >> $GITHUB_STEP_SUMMARY || true
         fi
-        echo "```" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
     - name: Test with pytest
       id: pytest
@@ -97,9 +97,9 @@ jobs:
         pytest
 
         echo "### Coverage report" >> $GITHUB_STEP_SUMMARY
-        echo "```" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
         coverage report >> $GITHUB_STEP_SUMMARY
-        echo "```" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
 
 
