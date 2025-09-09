@@ -30,26 +30,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # recompute config files only if github variables changed
-    - name: Cache config files
-      uses: actions/cache@v4
-      with:
-        path: |
-          .coveragerc
-          pytest.ini
-        key: ${{ env.PYTHON_SOURCE_DIR }}-${{ env.PYTHON_TEST_DIR }}-${{ hashFiles('.coveragerc', 'pytest.ini') }}
-        restore-keys: |
-          ${{ env.PYTHON_SOURCE_DIR }}-${{ env.PYTHON_TEST_DIR }}-
-
-    - if: steps.cache-config-files.outputs.cache-hit != 'true'
-      id: update-config
-      name: Set test and source dir in config files
+    - name: Set test and source dir in config files
       run: |
         echo "Config files not found in cache, updating them"
-        sed -i "s|*/tests/*|*/${{ env.PYTHON_TEST_DIR }}/*|g" .coveragerc
+        sed -i "s|/.*# <test-folder>|/${{ env.PYTHON_TEST_DIR }}/*|g" .coveragerc
         cat .coveragerc
-        sed -i "s|^testpaths = .*|testpaths = ${{ env.PYTHON_TEST_DIR }}|g" pytest.ini
-        sed -i "s|^pythonpath = .*|pythonpath = ${{ env.PYTHON_SOURCE_DIR }}|g" pytest.ini
+        sed -i "s|.*; <test-folder>|testpaths = ${{ env.PYTHON_TEST_DIR }}|g" pytest.ini
+        sed -i "s|.*; <source-folder>|pythonpath = ${{ env.PYTHON_SOURCE_DIR }}|g" pytest.ini
+        sed -i "s|\-\-cov\=.*|--cov=${{ env.PYTHON_SOURCE_DIR }}|g" pytest.ini
         cat pytest.ini
 
     - name: Set up Python ${{ matrix.python-version }}
