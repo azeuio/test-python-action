@@ -1,4 +1,5 @@
 """A simple Python script that prints messages to the console."""
+import time
 
 def unused_function(hello):
     pass
